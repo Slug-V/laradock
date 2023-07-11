@@ -34,8 +34,8 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
 ;fi
 
 # PECL won't read http_proxy, so hand-insert if the env exists
-RUN if [ -z $http_proxy ]; then
-    pear config-set http_proxy $http_proxy
+RUN if [ -z $http_proxy ]; then \
+    pear config-set http_proxy $http_proxy \
 ;fi
 
 # always run apt update when start and after add new source list, then clean up at end.
