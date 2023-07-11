@@ -40,6 +40,11 @@ RUN apk --update add wget \
     apk --update add openssl-dev; \
   fi
 
+# PECL won't read http_proxy, so hand-insert if the env exists
+RUN if [ -z $http_proxy ]; then
+    pear config-set http_proxy $http_proxy
+;fi
+
 RUN pecl channel-update pecl.php.net; \
   docker-php-ext-install mysqli mbstring pdo pdo_mysql xml pcntl; \
   if [ $(php -r "echo PHP_VERSION_ID - PHP_RELEASE_VERSION;") = "80100" ] || \
