@@ -41,7 +41,7 @@ RUN apk --update add wget \
   fi
 
 # PECL won't read http_proxy, so hand-insert if the env exists
-RUN if [ -z $http_proxy ]; then \
+RUN if [ -n $http_proxy ]; then \
     pear config-set http_proxy $http_proxy \
 ;fi
 
